@@ -1,0 +1,14 @@
+{
+  "name": "testing_ts_tuts",
+  "version": "1.0.0",
+  "description": "This is just testing bundlers and building for ts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick D",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
+}
