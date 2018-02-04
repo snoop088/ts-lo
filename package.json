@@ -4,11 +4,20 @@
   "description": "This is just testing bundlers and building for ts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --port 4222 --host 192.168.0.181",
+    "build": "webpack"
   },
   "author": "Nick D",
   "license": "ISC",
   "devDependencies": {
+    "light-server": "^2.2.1",
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.6.2",
     "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "@types/gsap": "^1.19.1",
+    "gsap": "^1.20.3"
   }
 }
