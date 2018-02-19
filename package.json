@@ -14,7 +14,8 @@
     "light-server": "^2.2.1",
     "ts-loader": "^3.2.0",
     "typescript": "^2.6.2",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
     "@types/gsap": "^1.19.1",
