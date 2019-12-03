@@ -4,13 +4,13 @@ import { TestDeco } from './decos/test-deco';
     surname: 'Stevens'
 })
 export class Dummy {
-    private _name: string; 
+    private _name!: string; 
     set name(val: string) {
         this._name = val;
     }
-    surname: string;
-    type: string;
-    count: number
+    surname!: string;
+    type!: string;
+    count!: number;
     constructor(){
     }
     showName(el: HTMLElement | null){

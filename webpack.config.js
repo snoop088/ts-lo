@@ -1,14 +1,16 @@
 // webpack.config.js
+const path = require('path');
 module.exports = {
     entry: './src/main.ts',
     output: {
-        filename: './dist/bundle.js'
+        path: path.resolve(__dirname, "dist"),
+        filename: 'bundle.js'
     },
     resolve: {
         extensions: ['.webpack.js', '.web.js', '.ts', '.js']
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.ts$/, loader: 'ts-loader' }
         ]
     },
