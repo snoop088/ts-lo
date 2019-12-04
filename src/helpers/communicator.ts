@@ -1,6 +1,7 @@
 export class Communicator {
 
     private static instance: Communicator;
+    private _content: any;
 
     private constructor() { }
 
@@ -10,4 +11,11 @@ export class Communicator {
         }
         return this.instance;
     }
+    get content() {
+        return this._content;
+    }
+    set content(val) {
+        this._content = val;
+    }
+    
 }

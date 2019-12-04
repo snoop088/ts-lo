@@ -1,5 +1,6 @@
 declare var TweenLite: any;
 import { TestDeco } from './decos/test-deco';
+import { Communicator } from './helpers/communicator';
 @TestDeco({
     surname: 'Stevens'
 })
@@ -14,6 +15,7 @@ export class Dummy {
     constructor(){
     }
     showName(el: HTMLElement | null){
+        console.log(Communicator.Instance.content.lang);
         if (el){
             el.innerHTML = this._name + ' ' + (this.surname || '');
         }
