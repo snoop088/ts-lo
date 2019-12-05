@@ -15,9 +15,14 @@ export class Dummy {
     constructor(){
     }
     showName(el: HTMLElement | null){
-        console.log(Communicator.Instance.content.lang);
         if (el){
-            el.innerHTML = this._name + ' ' + (this.surname || '');
+            const lang = document.createElement('div');
+            const name = document.createElement('div');
+            name.className = 'my-name';
+            lang.innerHTML = 'Language: ' + Communicator.Instance.content.lang;
+            name.innerHTML = 'Name: ' + this._name + ' ' + (this.surname || '');
+            el.appendChild(name);
+            el.appendChild(lang)
         }
     }
     moveTo(el: HTMLElement | null, dist: number) {
