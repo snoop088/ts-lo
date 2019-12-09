@@ -1,5 +1,6 @@
 declare var TweenLite: any;
 import { TestDeco } from './decos/test-deco';
+import * as chrome_lib from 'chrome-lib';
 @TestDeco({
     surname: 'Stevens'
 })
@@ -17,6 +18,7 @@ export class Dummy {
         if (el){
             el.innerHTML = this._name + ' ' + (this.surname || '');
         }
+        console.log(chrome_lib.ver());
     }
     moveTo(el: HTMLElement | null, dist: number) {
         if (el && TweenLite) {
