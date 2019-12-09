@@ -14,6 +14,12 @@ module.exports = {
             { test: /\.ts$/, loader: 'ts-loader' }
         ]
     },
+    devtool: 'inline-source-map',
+    devServer: {
+        publicPath: '/dist/',
+        index: 'index.html',
+
+    },
     externals: {
         'TweenLite': {
             commonjs: "TweenLite",
