@@ -1,17 +1,18 @@
-import { Observable, merge, Subject, timer } from 'rxjs';
+import { Observable, merge, Subject, fromEvent, of, timer, interval } from 'rxjs';
 import {
     mapTo,
     scan,
     startWith,
     distinctUntilChanged,
     shareReplay,
-    filter, switchMap, pairwise, takeUntil, debounceTime
+    map,
+    filter, switchMap, pairwise, takeUntil, debounceTime, tap, takeWhile, take, skip
 } from 'rxjs/operators'
-
+export const COMBO = ['a', 's', 'd', 'f', 'g'];
 export class TestRxjs {
     public taskStarts = new Subject();
     public taskCompletions = new Subject();
-    public showSpinner: (total: number, completed: number) => Observable<any>
+
 
     private spinnerWithStats: Observable<any>;
 
@@ -24,10 +25,15 @@ export class TestRxjs {
     private shouldHideSpinner: Observable<boolean>
     private shouldShowSpinner: Observable<any>
 
-    private loadStats: Observable<{ total: number, completed: number, previousLoading: number }>
+    private loadStats: Observable<{ total: number, completed: number, previousLoading: number }>;
+    private keyPresses = fromEvent(document, 'keypress').pipe(map((event: any) => event.key), tap(r => console.log(r)));
 
     private el!: HTMLElement;
 
+    private showSpinner: (total: number, completed: number) => Observable<string>;
+    private keyCombo: (combo: string[]) => Observable<boolean>;
+    private keyPressed: (key: string) => Observable<boolean>;
+    private comboTriggered: any;
     private myObs: Observable<string>;
     constructor() {
 
@@ -92,6 +98,29 @@ export class TestRxjs {
         );
         this.shouldShowSpinner.subscribe(r => console.log(r));
 
+        ////////////////////////////////////////////////////////
+        this.keyPressed = (key: string) => {
+            return this.keyPresses.pipe(filter(keyPressed => keyPressed === key), (mapTo(true)))
+        }
+        this.keyCombo = (combo: string[]) => {
+            const comboInitiator = combo[0];
+            return this.keyPressed(comboInitiator).pipe(switchMap(() => { // Means combo has started! //
+                return this.keyPresses.pipe(
+                    takeUntil(timer(3000)),
+                    takeWhile((key, index) => combo[index + 1] === key),
+                    skip(combo.length - 2), // skips all of the keypresses + initiator that pass above, but leaves the last one
+                    take(1),
+                    mapTo(true)
+                )
+            })
+            )
+        }
+        this.comboTriggered = this.keyCombo(COMBO);
+        interval(1000).pipe(
+            takeUntil(this.comboTriggered)
+        ).subscribe(x => console.log(x),
+            (err) => { },
+            () => console.log('completed'));
     }
     get myOb$(): Observable<string> {
         return this.myObs;
