@@ -115,12 +115,12 @@ export class TestRxjs {
             })
             )
         }
-        this.comboTriggered = this.keyCombo(COMBO);
-        interval(1000).pipe(
-            takeUntil(this.comboTriggered)
-        ).subscribe(x => console.log(x),
-            (err) => { },
-            () => console.log('completed'));
+        // this.comboTriggered = this.keyCombo(COMBO);
+        // interval(1000).pipe(
+        //     takeUntil(this.comboTriggered)
+        // ).subscribe(x => console.log(x),
+        //     (err) => { },
+        //     () => console.log('completed'));
     }
     get myOb$(): Observable<string> {
         return this.myObs;

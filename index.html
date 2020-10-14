@@ -5,91 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.0.1_min.js"></script>
-
-    <script src="https://s0.2mdn.net/ads/studio/Enabler.js">
-    </script>
-    <!--
- * Dynamic Content Enable code for Profile: 10507466
- *
- * The following code initializes the following dynamic variables for
- * development testing and live serving of Fields associated to the above profile
--->
-
-    <!--
-     * You may access the variables in the following manner
-     * AFTER the Studio Enabler is initialized.
-     * var uid = dynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].uid;
-     * Note: be sure to use "dynamicContent", not "devDynamicContent"
-     * Note: be sure to use ExitOverride to create your exit URL dynamically; follow the instructions on our Help center: https://support.google.com/richmedia/answer/2664807
-    -->
-
-    <!-- DynamicContent Start: HTML5 invocation code. -->
-    <script>
-        var contentSet = false;
-        if (!Enabler.isInitialized()) {
-            Enabler.addEventListener(
-                studio.events.StudioEvent.INIT,
-                enablerInitialized);
-        } else {
-            enablerInitialized();
-        }
-        function enablerInitialized() {
-            // Enabler initialized.
-            // In App ads are rendered offscreen so animation should wait for
-            // the visible event. These are simulated with delays in the local
-            // environment.
-            // Dynamic Content variables and sample values
-
-
-            Enabler.setProfileId(10507466);
-            var devDynamicContent = {};
-
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1 = [{}];
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0]._id = 0;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].uid = 1;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].reportingLabel = "report_label_test";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].active = true;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].isdefault = true;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].lang = "en";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].image1 = "https:\/\/static.streameye.net\/galleries\/46d5d878-2250-4e35-9948-75c8130644aa\/man_city";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].image2 = "https:\/\/static.streameye.net\/galleries\/46d5d878-2250-4e35-9948-75c8130644aa\/messi";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].sportLogo1 = {};
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].sportLogo1.Url = "https://static.streameye.net/galleries/57dac17a-9023-4d48-ba3d-0db9750814b6/liverpool.jpg";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].sportLogo2 = {};
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].sportLogo2.Url = "https://static.streameye.net/galleries/57dac17a-9023-4d48-ba3d-0db9750814b6/premier_league.jpg";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].sportLogo3 = {};
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].sportLogo3.Url = "https://static.streameye.net/galleries/57dac17a-9023-4d48-ba3d-0db9750814b6/arsenal_fc.jpg";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].images = 2;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].logo = "https:\/\/static.streameye.net\/se5\/dazn\/img\/dazn_logo_white.svg";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].logos = 3;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].hasFooter = true;
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].txt1 = "Stream contract free";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].txt2 = "\u20AC4.99\/month";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].team1 = "{{Fluminense}}";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].team2 = "{{Corinthians}}";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].vs = "{vs}";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].league = "CONMEBOL Sul-Americana";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].day = "Saturday";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].hour = "20:00";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].cta = "Free Trial";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].leagueLogo = {};
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].leagueLogo.Url = "https://static.streameye.net/se5/dazn_free_trial_fixture/img/copa.png";
-            devDynamicContent.GLO_Fixture_template_with_imagery_html5_Sheet1[0].looping = 2;
-            
-            Enabler.setDevDynamicContent(devDynamicContent);
-            contentSet = true;
-            if (!Enabler.isVisible()) {
-                Enabler.addEventListener(
-                    studio.events.StudioEvent.VISIBLE,
-                    adVisible);
-            } else {
-                adVisible();
-            }
-        }
-        function adVisible() {
-            // Ad visible, start ad/animation.
-        }
-    </script>
+    
     <style>
         * {
             box-sizing: border-box;
@@ -112,6 +28,9 @@
         .green-sq.active {
             display: flex;
         }
+        .api-container {
+            margin-left: 100px;
+        }
     </style>
 
     <title>Document</title>
@@ -119,6 +38,7 @@
 
 <body id="body">
     <div class="jj"></div>
+    <div class="api-container"></div>
 </body>
 <script src="dist/bundle.js"></script>
 
