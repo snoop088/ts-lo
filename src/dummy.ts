@@ -6,7 +6,8 @@ import { TestRxjs } from './rxjs_trials/test-rxjs';
     surname: 'Stevens'
 })
 export class Dummy {
-    private _name!: string; 
+    private _name!: string;
+    private _people!: Promise<any>;
     set name(val: string) {
         this._name = val;
     }
@@ -14,11 +15,11 @@ export class Dummy {
     type!: string;
     count!: number;
     myTestRx: TestRxjs;
-    constructor(){
+    constructor() {
         this.myTestRx = new TestRxjs();
     }
-    showName(el: HTMLElement | null){
-        if (el){
+    showName(el: HTMLElement | null) {
+        if (el) {
             const rand = chrome_lib.testB(200);
             const lang = document.createElement('div');
             const name = document.createElement('div');
@@ -35,7 +36,7 @@ export class Dummy {
         } else {
             console.log('err');
         }
-        
+
     }
     createButton(el: HTMLElement | null) {
         if (el) {
@@ -56,10 +57,23 @@ export class Dummy {
             const btn = el.appendChild(document.createElement('button'));
             btn.innerHTML = 'click for API?';
             btn.type = 'button';
-            btn.addEventListener('click', (target) => {
-                
-            })
+            btn.addEventListener('click', () => this.loadPeople(el));
         }
+    }
+    public async loadPeople(el: HTMLElement) {
+        if (!document.querySelector('.api-container > div')) {
+            const response = await fetch('http://192.168.12.101:1337/people');
+            const people = await response.json();
+            this.dislayPeople(people, el);
+        }
+
+    }
+    public dislayPeople(people: any[], el: HTMLElement) {
+        people.forEach(person => {
+            const p = el.appendChild(document.createElement('div'));
+            p.innerHTML = `Hi, ${person.title} ${person.firstName} ${person.lastName},<br>email: ${person.email}`
+        })
+
     }
     checkObs() {
         const chk = new TestRxjs();
