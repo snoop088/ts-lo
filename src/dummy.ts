@@ -2,6 +2,8 @@ declare var TweenMax: any;
 import { TestDeco } from './decos/test-deco';
 import * as chrome_lib from 'chrome-lib';
 import { TestRxjs } from './rxjs_trials/test-rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { GithubRxjs } from './rxjs_trials/github-rxjs'
 @TestDeco({
     surname: 'Stevens'
 })
@@ -15,8 +17,20 @@ export class Dummy {
     type!: string;
     count!: number;
     myTestRx: TestRxjs;
+    githubRxjs!: GithubRxjs;
     constructor() {
         this.myTestRx = new TestRxjs();
+        // this.myTestRx.nestedStreams().pipe(
+        //     mergeMap(value => value)
+        // ).subscribe();
+        
+        // this.myTestRx.streamArr().subscribe(console.log)
+        this.gitHubUsers();
+    }
+    gitHubUsers() {
+        const usersContainer = document.getElementsByClassName('users-container')[0] as HTMLElement;
+        this.githubRxjs = new GithubRxjs(5, usersContainer);
+        
     }
     showName(el: HTMLElement | null) {
         if (el) {

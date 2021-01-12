@@ -6,7 +6,7 @@ import {
     distinctUntilChanged,
     shareReplay,
     map,
-    filter, switchMap, pairwise, takeUntil, debounceTime, tap, takeWhile, take, skip
+    filter, switchMap, pairwise, takeUntil, debounceTime, tap, takeWhile, take, skip, mergeMap
 } from 'rxjs/operators'
 export const COMBO = ['a', 's', 'd', 'f', 'g'];
 export class TestRxjs {
@@ -77,7 +77,7 @@ export class TestRxjs {
             new Observable(subscriber => {
                 this.el.classList.add('active');
                 this.el.innerHTML = Math.round(completed / total * 100) + '%';
-                subscriber.next('blah blah')
+                subscriber.next('blah blah');
                 return () => {
                     this.el.classList.remove('active');
                 }
@@ -131,6 +131,35 @@ export class TestRxjs {
     }
     public existingTaskCompleted() {
         this.taskCompletions.next();
+    }
+    public streamArr(): Observable<string> {
+        const arr = ['bb', 'cc', 'dd', 'ee', 'ff'];
+
+        return timer(0, 2000).pipe(
+            take(5),
+            map(i => arr[i]),
+        )
+    }
+    public nestedStreams() {
+
+        const setsOfValues = [
+            ["a", "b", "c", "d", "e", "f"],
+            [1, 2, 3, 4, 5, 6],
+            ["😀", "🐶", "🍏", "⚽️", "🚗", "⌚️"]
+        ];
+
+        const threeStreamsOfThings$ = timer(0, 1333).pipe(
+            take(3),
+            map(outerNumber =>
+                timer(0, 1000).pipe(
+                    take(6),
+                    map(innerNumber => setsOfValues[outerNumber][innerNumber]),
+                )
+            )
+        );
+
+        threeStreamsOfThings$.pipe(mergeMap(value => value));
+        return threeStreamsOfThings$;
     }
 
 }
