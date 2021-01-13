@@ -13,12 +13,13 @@ export interface ViewModel {
     userSite: HTMLElement;
     userRefresh: HTMLElement
 }
-
+// presentational (dumb) component. most important part is exposing the 
+// refresh click to the parent class via a public property
 export class GithubUser {
 
     public refreshUser$: Observable<Event>;
     private parentElement: HTMLElement;
-    private viewModel: ViewModel
+    private viewModel: ViewModel;
 
         constructor(parentElement: HTMLElement) {
         
@@ -57,9 +58,12 @@ export class GithubUser {
             if (user) {
                 userAvatar.setAttribute('src', user.avatarUrl);
                 userSite.setAttribute('href', user.site);
+                userSite.setAttribute('target', '_blank');
                 userSite.textContent = 'visit site';
                 userName.textContent = user.userName;
+                // append here so that the textContent does not overwrite the x-icon
                 userName.appendChild(userRefresh);
+                // user material icons to display a x icon
                 userRefresh.textContent = 'clear';
                 userAvatar.addEventListener('click', (ev) => window.open(user.site, '_blank'));
             } else {

@@ -7,6 +7,7 @@
 html, body {
     padding: 0; margin: 0;
     font-family: 'Antic+Slab', serif;
+    background: #333333;
 }
 
 .jj {
@@ -33,16 +34,17 @@ html, body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    background: rgb(230, 223, 238);
+    background: rgb(241, 228, 255);
+    border: 5px solid white;
     font-size: 2.5rem;
-    margin-top: 1rem;
+    margin: 1rem;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.5)
 }
 .user-container {
     padding: 1rem;
     display: flex;
     flex: 0;
     min-width: 25rem;
-    
     flex-direction: column;
     min-height: 30rem;
     justify-content: space-between;
@@ -64,6 +66,7 @@ html, body {
     padding: 5px;
     cursor: pointer;
     background-color:rgba(255, 255, 255, 0.5);
+    min-height: 5rem;
 }
 .users-container > button {
     padding: 0 1rem;
