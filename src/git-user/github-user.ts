@@ -1,6 +1,4 @@
 import { fromEvent, Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-
 export interface User {
     userName: string;
     site: string;

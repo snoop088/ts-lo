@@ -20,14 +20,13 @@ export class GithubRxjs {
 
     // Get GitHub users stream and share to multiple subscribers
     private getUsers$: Observable<GitHubUserData[]>;
-    
+
     // Implement refresh Users Stream
     private refreshUsersEvent$!: Observable<Event>;
     // Implement refresh Users
     private refreshApi$!: Observable<string>
-    
+
     private api = 'https://api.github.com/users?per_page=30';
-    private requestApi$ = of(this.api);
     constructor(numUsers: number, parentEl: HTMLElement) {
 
         // create button to refresh
@@ -36,16 +35,17 @@ export class GithubRxjs {
         this.refreshUsersEvent$ = fromEvent(refreshButton, 'click');
         // map the click to a new request to the API + some cache buster
         this.refreshApi$ = this.refreshUsersEvent$.pipe(
-            mapTo(this.api + '&seed=' + Math.random() * 139873),            
+            mapTo(this.api + '&seed=' + Math.random() * 139873),
         );
 
-        // utilise the fromFetch of rxJS to envoke fetch promise and covert to observable
-        // merge the initial API call and subsequent calls from the refresh button
-        this.getUsers$ = merge(this.requestApi$, this.refreshApi$).pipe(
-            // convert request to response via the fromFetch operatror
+        this.getUsers$ = this.refreshApi$.pipe(
+            // start with the first call, then add new calls on clicking refresh
+            startWith(this.api),
+            // utilise the fromFetch of rxJS to envoke fetch promise and covert to observable
             switchMap(url => fromFetch(url)),
-            // handle the response
+            // convert request to response
             switchMap(response => {
+                // handle the response
                 if (response.ok) {
                     return response.json()
                 } else {
