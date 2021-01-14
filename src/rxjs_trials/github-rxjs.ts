@@ -80,7 +80,7 @@ export class GithubRxjs {
         }
     }
     private getRandomUser(): Observable<User | null> {
-        return this.getUsers$.pipe(
+        const randomUser$ = this.getUsers$.pipe(
             // get a random user from the array of users
             // NOTE: the getUsers$ stream contains a stream of user arrays, not a stream of single users
             // happening over time (i.e. when a refresh users button is pressed a new array of users is returned)
@@ -89,8 +89,11 @@ export class GithubRxjs {
             map(user => {
                 return { userName: user.login, avatarUrl: user.avatar_url, site: user.html_url } as User
             }),
-            // starts with null, so that we can display loading message in the presentational component/ class
             startWith(null)
         )
+        const clearOnRefreshClicked$ = this.refreshUsersEvent$.pipe(mapTo(null));
+
+        return merge(randomUser$, clearOnRefreshClicked$);
+        
     }
 }
