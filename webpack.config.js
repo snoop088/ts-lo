@@ -1,6 +1,7 @@
 // webpack.config.js
 const path = require('path');
-module.exports = {
+const TerserPlugin = require('terser-webpack-plugin');
+const config = {
     entry: './src/main.ts',
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -14,7 +15,7 @@ module.exports = {
             { test: /\.ts$/, loader: 'ts-loader' }
         ]
     },
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
     devServer: {
         publicPath: '/dist/',
         index: 'index.html',
@@ -27,4 +28,26 @@ module.exports = {
             root: "TweenLite" // indicates global variable
         }
     }
+}
+module.exports = (env, argv) => {
+    if (argv.mode === 'production') {
+        const optiConfig = Object.assign(config, {
+            optimization: {
+                minimize: true,
+                minimizer: [new TerserPlugin(
+                    {
+                        terserOptions: {
+                            ecma: 2016,
+                            compress: { defaults: true },
+                            mangle: true, // Note `mangle.properties` is `false` by default.
+                        },
+                    }
+                )
+                ]
+            },
+            devtool: 'hidden-source-map'
+        });
+        return optiConfig
+    }
+    return config
 };

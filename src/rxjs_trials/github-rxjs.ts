@@ -28,7 +28,7 @@ export class GithubRxjs {
 
     private api = 'https://api.github.com/users?per_page=30';
     constructor(numUsers: number, parentEl: HTMLElement) {
-
+        
         // create button to refresh
         const refreshButton = document.createElement('button');
         refreshButton.textContent = 'refresh users';
@@ -36,8 +36,7 @@ export class GithubRxjs {
         // map the click to a new request to the API + some cache buster
         this.refreshApi$ = this.refreshUsersEvent$.pipe(
             mapTo(this.api + '&seed=' + Math.random() * 139873),
-        );
-
+        ); 
         this.getUsers$ = this.refreshApi$.pipe(
             // start with the first call, then add new calls on clicking refresh
             startWith(this.api),
